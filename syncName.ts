@@ -209,7 +209,7 @@ function handleError(error: any) {
 
 function applyArgv(argv: ParsedArgs): SyncConfig {
     if (argv.help || argv.h || argv._.includes('help')) {
-        console.log('\nARGS: -s <SOURCE_DIR> -t <TARGET_DIR> [-b <BACKUP_DIR>]\n');
+        console.log('\nARGS: -s <SOURCE_DIR> -t <TARGET_DIR> [-b <BACKUP_DIR>] [-p <COLLISIONS_POSTFIX>]\n');
         process.exit();
     }
     const targetRoot = argv.t;
@@ -334,7 +334,7 @@ function main() {
     console.log('Collisions found:', results.collisions.size, '\n');
 
     if (results.collisions.size) {
-        console.log('Resolved:');
+        console.log(`Resolved (with postfix ${collisionPostfix}):`);
         const collisionsBar = multi.newBar(':bar :current/:total :percent ETA: :etas', { total: results.collisions.size, width: 40 });
 
         const collisionsBarTick = () => {
